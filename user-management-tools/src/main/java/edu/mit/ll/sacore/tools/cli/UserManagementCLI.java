@@ -123,7 +123,7 @@ public class UserManagementCLI {
             opt.addOption("pass", true, "used with -jasypt: the input to encrypt");
             opt.addOption("sso", false, "SSO Usermanagement Actions");
             opt.addOption("setstatus", true, "used with -sso: 'e' or 'd' for enable or disable SSO user");
-            opt.addOption("wldapi", "write-ldap-info", false, "Write ldif file with user info from NICS");
+            opt.addOption("wldapi", "write-ldap-info", false, "Write ldif file with user info from SCOUT");
             opt.addOption("user", true, "Used with -wldapi: the username");
             opt.addOption("password", true, "Used with -wldapi: the password");
             opt.addOption("first", true, "Used with -wldapi: User's first name");
