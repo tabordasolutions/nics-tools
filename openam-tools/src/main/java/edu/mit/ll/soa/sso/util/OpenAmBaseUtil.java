@@ -567,6 +567,50 @@ public abstract class OpenAmBaseUtil
 		return null;
 	}
 
+    private Set findIdentityByUID(String uid) throws Exception {
+        IdSearchControl searchControl = new IdSearchControl();
+        Set mailValue = new HashSet<String>();
+        mailValue.add(uid);
+        Map criteria = new HashMap<String, String>();
+        criteria.put("uid", mailValue);
+        searchControl.setSearchModifiers(IdSearchOpModifier.AND, criteria);
+        IdSearchResults results = idRepo.searchIdentities(IdType.USER, "*", searchControl);
+        Set ids = results.getSearchResults();
+        return ids;
+    }
+
+    public boolean deleteUserIdentity(String uid) throws Exception {
+        System.out.println("\ndeleteIdentity: TypeID: " + IdType.USER + ", ID: " + uid + "\n");
+        try {
+            if (idRepo == null) {
+                System.out.println("idRepo is null!");
+            } else {
+                AMIdentity realmId = idRepo.getRealmIdentity();
+                if (realmId != null) {
+                    System.out.println("Valid realmId: \n" +
+                                    "\tDN: " + realmId.getDN() +
+                                    "\n\tNAME: " + realmId.getName() +
+                                    "\n\tREALM: " + realmId.getRealm() +
+                                    "\n\tuniversalId: " + realmId.getUniversalId()
+                    );
+                } else {
+                    System.out.println("Realm Identity is null!");
+                }
+            }
+
+            Set<AMIdentity> ids = this.findIdentityByUID(uid);
+            if(ids.isEmpty()) {
+                _log.error("Unable to find identity user with uid : " + uid);
+                return false;
+            }
+            idRepo.deleteIdentities(ids);
+        } catch(Exception e) {
+            _log.error("Error deleting user with uid : " + uid, e);
+            return false;
+        }
+        return true;
+    }
+
 	protected AMIdentity createRealmIdentity(String realmid, boolean active)
 	{
 		Map attrs = new HashMap();

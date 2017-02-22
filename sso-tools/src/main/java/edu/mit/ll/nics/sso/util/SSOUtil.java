@@ -263,6 +263,18 @@ public class SSOUtil
 		return "{\"status\":\"" + ((val) ? "success" : "fail") + "\",\"message\":\"" + message + "\"}";
 	}
 
+    public String deleteUser(String uid) {
+        boolean status = false;
+        try {
+          status = utils.deleteUserIdentity(uid);
+        } catch(Exception e){
+            log.error("Error deleting user identity by uid : " + uid, e);
+        }
+        String message = status ? "successfully deleted identity with uid : " + uid : "failed to delete identity with uid : " + uid;
+
+        return "{\"status\":\"" + ((status) ? "success" : "fail") + "\",\"message\":\"" + message + "\"}";
+    }
+
 	public boolean createOrg(String org, boolean active)
 	{
 		boolean val = false;
