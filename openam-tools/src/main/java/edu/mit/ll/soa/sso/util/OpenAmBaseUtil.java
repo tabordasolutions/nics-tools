@@ -484,18 +484,18 @@ public abstract class OpenAmBaseUtil
 
 	private AMIdentity createIdentity(IdType typeId, String id, HashMap attrs) throws IdRepoException, SSOException
 	{
-		System.out.println("\ncreateIdentity: TypeID: " + typeId.getName() + ", ID: " + id + "\n");
+		_log.debug("\ncreateIdentity: TypeID: " + typeId.getName() + ", ID: " + id + "\n");
 		if(idRepo == null) {
-			System.out.println("idRepo is null!");
+            _log.error("idRepo is null!");
 		} else {
 			AMIdentity realmId = idRepo.getRealmIdentity();
 			if(realmId != null) {
-				System.out.println("Valid realmId: \n" + 
-					"\tDN: " + realmId.getDN() + 
-					"\n\tNAME: " + realmId.getName() +
-					"\n\tREALM: " + realmId.getRealm() +
-					"\n\tuniversalId: " + realmId.getUniversalId()					
-				);
+				_log.debug("Valid realmId: \n" +
+                                "\tDN: " + realmId.getDN() +
+                                "\n\tNAME: " + realmId.getName() +
+                                "\n\tREALM: " + realmId.getRealm() +
+                                "\n\tuniversalId: " + realmId.getUniversalId()
+                );
 				
 				/*Set members = realmId.getMembers(IdType.USER);
 				if(members != null && !members.isEmpty()) {
@@ -567,23 +567,18 @@ public abstract class OpenAmBaseUtil
 		return null;
 	}
 
-    private Set findIdentityByUID(String uid) throws Exception {
+    private Set<AMIdentity> findIdentityByUID(String uid) throws Exception {
+        Map<String, Set<String>> criteria = Collections.singletonMap("uid", Collections.singleton(uid));
         IdSearchControl searchControl = new IdSearchControl();
-        Set mailValue = new HashSet<String>();
-        mailValue.add(uid);
-        Map criteria = new HashMap<String, String>();
-        criteria.put("uid", mailValue);
         searchControl.setSearchModifiers(IdSearchOpModifier.AND, criteria);
-        IdSearchResults results = idRepo.searchIdentities(IdType.USER, "*", searchControl);
-        Set ids = results.getSearchResults();
-        return ids;
+        return idRepo.searchIdentities(IdType.USER, "*", searchControl).getSearchResults();
     }
 
     public boolean deleteUserIdentity(String uid) throws Exception {
-        System.out.println("\ndeleteIdentity: TypeID: " + IdType.USER + ", ID: " + uid + "\n");
+        _log.debug("\ndeleteIdentity: TypeID: " + IdType.USER + ", ID: " + uid + "\n");
         try {
             if (idRepo == null) {
-                System.out.println("idRepo is null!");
+                _log.error("idRepo is null!");
             } else {
                 AMIdentity realmId = idRepo.getRealmIdentity();
                 if (realmId != null) {
