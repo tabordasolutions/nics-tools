@@ -484,18 +484,18 @@ public abstract class OpenAmBaseUtil
 
 	private AMIdentity createIdentity(IdType typeId, String id, HashMap attrs) throws IdRepoException, SSOException
 	{
-		System.out.println("\ncreateIdentity: TypeID: " + typeId.getName() + ", ID: " + id + "\n");
+		_log.debug("\ncreateIdentity: TypeID: " + typeId.getName() + ", ID: " + id + "\n");
 		if(idRepo == null) {
-			System.out.println("idRepo is null!");
+            _log.error("idRepo is null!");
 		} else {
 			AMIdentity realmId = idRepo.getRealmIdentity();
 			if(realmId != null) {
-				System.out.println("Valid realmId: \n" + 
-					"\tDN: " + realmId.getDN() + 
-					"\n\tNAME: " + realmId.getName() +
-					"\n\tREALM: " + realmId.getRealm() +
-					"\n\tuniversalId: " + realmId.getUniversalId()					
-				);
+				_log.debug("Valid realmId: \n" +
+                                "\tDN: " + realmId.getDN() +
+                                "\n\tNAME: " + realmId.getName() +
+                                "\n\tREALM: " + realmId.getRealm() +
+                                "\n\tuniversalId: " + realmId.getUniversalId()
+                );
 				
 				/*Set members = realmId.getMembers(IdType.USER);
 				if(members != null && !members.isEmpty()) {
@@ -566,6 +566,45 @@ public abstract class OpenAmBaseUtil
 
 		return null;
 	}
+
+    private Set<AMIdentity> findIdentityByUID(String uid) throws Exception {
+        Map<String, Set<String>> criteria = Collections.singletonMap("uid", Collections.singleton(uid));
+        IdSearchControl searchControl = new IdSearchControl();
+        searchControl.setSearchModifiers(IdSearchOpModifier.AND, criteria);
+        return idRepo.searchIdentities(IdType.USER, "*", searchControl).getSearchResults();
+    }
+
+    public boolean deleteUserIdentity(String uid) throws Exception {
+        _log.debug("\ndeleteIdentity: TypeID: " + IdType.USER + ", ID: " + uid + "\n");
+        try {
+            if (idRepo == null) {
+                _log.error("idRepo is null!");
+            } else {
+                AMIdentity realmId = idRepo.getRealmIdentity();
+                if (realmId != null) {
+                    System.out.println("Valid realmId: \n" +
+                                    "\tDN: " + realmId.getDN() +
+                                    "\n\tNAME: " + realmId.getName() +
+                                    "\n\tREALM: " + realmId.getRealm() +
+                                    "\n\tuniversalId: " + realmId.getUniversalId()
+                    );
+                } else {
+                    System.out.println("Realm Identity is null!");
+                }
+            }
+
+            Set<AMIdentity> ids = this.findIdentityByUID(uid);
+            if(ids.isEmpty()) {
+                _log.error("Unable to find identity user with uid : " + uid);
+                return false;
+            }
+            idRepo.deleteIdentities(ids);
+        } catch(Exception e) {
+            _log.error("Error deleting user with uid : " + uid, e);
+            return false;
+        }
+        return true;
+    }
 
 	protected AMIdentity createRealmIdentity(String realmid, boolean active)
 	{
