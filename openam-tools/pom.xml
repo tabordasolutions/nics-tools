@@ -36,8 +36,8 @@
 
 	<parent>
         <artifactId>master-pom</artifactId>
-        <groupId>edu.mit.ll.nics.tools</groupId>
-        <version>6.2</version>
+        <groupId>com.tabordasolutions.nics.tools</groupId>
+        <version>2017.1</version>
         <relativePath>..</relativePath>
     </parent>
 
