@@ -295,6 +295,11 @@
                 <artifactId>openam-idpdiscovery</artifactId>
                 <version>${openam.version}</version>
             </dependency>
+			<dependency>
+				<groupId>org.forgerock.commons</groupId>
+				<artifactId>i18n-core</artifactId>
+				<version>1.4.2</version>
+			</dependency>
 
 			<!-- sso-tools -->
             <dependency>
