@@ -35,9 +35,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>master-pom</artifactId>
-        <groupId>edu.mit.ll.nics.tools</groupId>
-        <version>6.2</version>
-		<relativePath>..</relativePath>
+        <groupId>com.tabordasolutions.nics.tools</groupId>
+        <version>2017.1</version>
+        <relativePath>..</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>jar</packaging>
@@ -45,7 +45,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>edu.mit.ll.nics.tools</groupId>
+            <groupId>com.tabordasolutions.nics.tools</groupId>
             <artifactId>openam-tools</artifactId>
         </dependency>
         <dependency>

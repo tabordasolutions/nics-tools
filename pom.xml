@@ -33,9 +33,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>edu.mit.ll.nics.tools</groupId>
+	<groupId>com.tabordasolutions.nics.tools</groupId>
 	<artifactId>master-pom</artifactId>
-	<version>6.2</version>
+	<version>2017.1</version>
 	<packaging>pom</packaging>
 
 	<modules>
@@ -51,7 +51,7 @@
 		<commons-codec.version>1.5</commons-codec.version>
 		<httpclient.version>3.1</httpclient.version>
 		<jasypt.version>1.9.0</jasypt.version>
-		<openam.version>12.0.0</openam.version>
+		<openam.version>12.0.4</openam.version>
 		<amqclient-version>2.7.1</amqclient-version>
 		<cxf.version>3.0.3</cxf.version>
 		<spring.version>4.1.4.RELEASE</spring.version>
@@ -76,57 +76,57 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>edu.mit.ll.em.api</groupId>
+				<groupId>com.tabordasolutions.nics.common</groupId>
 				<artifactId>api-rest-common</artifactId>
-				<version>${project.version}</version>
+				<version>2017.1</version>
 			</dependency>
 			<dependency>
-				<groupId>edu.mit.ll.nics.common</groupId>
+				<groupId>com.tabordasolutions.nics.common</groupId>
 				<artifactId>entities</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>edu.mit.ll.nics.common</groupId>
+				<groupId>com.tabordasolutions.nics.common</groupId>
 				<artifactId>nics-dao</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>edu.mit.ll.nics.common</groupId>
+				<groupId>com.tabordasolutions.nics.common</groupId>
 				<artifactId>geoserver-rest-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>edu.mit.ll.nics.common</groupId>
+				<groupId>com.tabordasolutions.nics.common</groupId>
 				<artifactId>web-service-request-lib</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>edu.mit.ll.nics.common</groupId>
+				<groupId>com.tabordasolutions.nics.common</groupId>
 				<artifactId>rabbitmq-client</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>edu.mit.ll.nics.common</groupId>
+				<groupId>com.tabordasolutions.nics.common</groupId>
 				<artifactId>messages</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>edu.mit.ll.nics.common</groupId>
+				<groupId>com.tabordasolutions.nics.common</groupId>
 				<artifactId>encryption-lib</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>edu.mit.ll.nics.common</groupId>
+				<groupId>com.tabordasolutions.nics.common</groupId>
 				<artifactId>hash-lib</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>edu.mit.ll.nics.common</groupId>
+				<groupId>com.tabordasolutions.nics.common</groupId>
 				<artifactId>rabbitmq-admin-interface</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
-                <groupId>edu.mit.ll.nics.tools</groupId>
+                <groupId>com.tabordasolutions.nics.tools</groupId>
                 <artifactId>sso-tools</artifactId>
                 <version>${project.version}</version>
             </dependency>	
@@ -295,10 +295,15 @@
                 <artifactId>openam-idpdiscovery</artifactId>
                 <version>${openam.version}</version>
             </dependency>
+			<dependency>
+				<groupId>org.forgerock.commons</groupId>
+				<artifactId>i18n-core</artifactId>
+				<version>1.4.2</version>
+			</dependency>
 
 			<!-- sso-tools -->
             <dependency>
-                <groupId>edu.mit.ll.nics.tools</groupId>
+                <groupId>com.tabordasolutions.nics.tools</groupId>
                 <artifactId>openam-tools</artifactId>
 				<version>${project.version}</version>
             </dependency>
@@ -511,9 +516,9 @@
 	</build>
 	<repositories>
 		<repository>
-			<id>forgerock</id>
+			<id>org.forgerock.openam</id>
 			<name>ForgeRock</name>
-			<url>http://maven.forgerock.org/repo/repo</url>
+			<url>https://maven.forgerock.org/repo/repo/</url>
 		</repository>
 	</repositories>
 </project>
