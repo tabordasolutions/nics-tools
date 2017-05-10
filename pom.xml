@@ -280,6 +280,11 @@
                 <artifactId>openam-clientsdk</artifactId>
                 <version>${openam.version}</version>
             </dependency>
+			<dependency>
+				<groupId>org.forgerock.openam</groupId>
+				<artifactId>openam-ldap-utils</artifactId>
+				<version>${openam.version}</version>
+			</dependency>
             <dependency>
                 <groupId>org.forgerock.openam</groupId>
                 <artifactId>openam-shared</artifactId>
