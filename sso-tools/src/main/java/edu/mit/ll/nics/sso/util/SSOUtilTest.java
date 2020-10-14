@@ -3,7 +3,7 @@ package edu.mit.ll.nics.sso.util;
 //import static org.junit.Assert.*;
 //
 //import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
-//import org.junit.Test;
+import org.junit.Test;
 //
 //import com.sun.identity.authentication.AuthContext;
 
